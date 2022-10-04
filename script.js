@@ -59,7 +59,15 @@ function createDivsForColors(colorArray) {
 
 // TODO: Implement this function!
 function handleCardClick(event) {
-  // you can use event.target to see which element was clicked
+  let cardOne = null;
+  let cardTwo = null;
+  const clickedCard = event.target;
+  const flippedCards = 0;
+
+  if(cardOne.clasName === cardTwo.className) {
+    return;
+  }
+  
   console.log("you just clicked", event.target);
 }
 

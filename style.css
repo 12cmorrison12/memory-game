@@ -5,3 +5,8 @@
   margin: 10px;
   display: inline-block;
 }
+
+.game-over {
+  font-size: 60px;
+  color: red;
+}

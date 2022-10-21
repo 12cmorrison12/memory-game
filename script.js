@@ -63,12 +63,45 @@ function handleCardClick(event) {
   let cardTwo = null;
   const clickedCard = event.target;
   const flippedCards = 0;
+  clickedCard.style.backgroundColor = clickedCard.classList[0];
 
-  if(cardOne.clasName === cardTwo.className) {
-    return;
+  if (event.target.classList.contains("flipped")) return;
+  if (cardOne.clasName === cardTwo.className) return;
+  if (!cardOne || !cardTwo) {
+    clickedCard.classList.add("flipped");
+    cardOne = cardOne || clickedCard;
+    cardTwo = clickedCard === cardOne ? null : clickedCard;
   }
-  
-  console.log("you just clicked", event.target);
+
+  if (cardOne && cardTwo) {
+    let noClick = true;
+    let firstCard = cardOne.className;
+    let secondCard = cardTwo.className;
+
+    if (firstCard === secondCard) {
+      flippedCards += 2;
+      cardOne.removeEventListenter('click', handleCardClick);
+      cardTwo.removeEventListenter('click', handleCardClick);
+      cardOne = null;
+      cardTwo = null;
+      noClick = false;
+    } else {
+      setTimeout(function () {
+        cardOne.style.backgroundColor = "";
+        cardTwo.style.backgroundColor = "";
+        cardOne.classList.remove("flipped");
+        cardTwo.classList.remove("flipped");
+        cardOne = null;
+        cardTwo = null;
+        noClick = false;
+      }, 1000);
+    }
+  }
+  if (flippedCards === COLORS.length) {
+    const newDiv = document.createElement("div");
+    newDiv.innerText = "GAME OVER!";
+    newDiv.className = "game-over";
+  }
 }
 
 // when the DOM loads
